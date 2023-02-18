@@ -3,13 +3,13 @@ package com.ecommerce.inditex.entities;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
 public class PriceFilterEntity {
 
-    private LocalDate appliedDate;
+    private LocalDateTime appliedDate;
 
     private String productId;
 
