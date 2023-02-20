@@ -1,4 +1,4 @@
-package com.ecommerce.inditex.database;
+package com.ecommerce.inditex.infrastructure.database.adapter;
 
 import com.ecommerce.inditex.domain.PriceBO;
 import com.ecommerce.inditex.infrastructure.database.entities.H2PriceEntity;

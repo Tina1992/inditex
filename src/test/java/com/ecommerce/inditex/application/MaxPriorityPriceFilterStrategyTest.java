@@ -1,4 +1,4 @@
-package com.ecommerce.inditex.strategies;
+package com.ecommerce.inditex.application;
 
 import com.ecommerce.inditex.application.MaxPriorityPriceFilterStrategy;
 import com.ecommerce.inditex.domain.PriceBO;

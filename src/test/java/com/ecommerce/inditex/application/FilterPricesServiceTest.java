@@ -1,4 +1,4 @@
-package com.ecommerce.inditex.services;
+package com.ecommerce.inditex.application;
 
 import com.ecommerce.inditex.application.FilterPricesService;
 import com.ecommerce.inditex.application.ports.PricesPort;

@@ -1,4 +1,4 @@
-package com.ecommerce.inditex.database;
+package com.ecommerce.inditex.infrastructure.database.repositories;
 
 import com.ecommerce.inditex.infrastructure.database.entities.H2PriceEntity;
 import com.ecommerce.inditex.infrastructure.database.repositories.H2PricesRepository;

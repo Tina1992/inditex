@@ -1,4 +1,4 @@
-package com.ecommerce.inditex.mappers;
+package com.ecommerce.inditex.infrastructure.rest.adapter;
 
 import com.ecommerce.inditex.domain.PriceBO;
 import com.ecommerce.inditex.infrastructure.rest.dto.PriceResponseDto;
