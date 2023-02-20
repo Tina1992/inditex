@@ -1,16 +1,18 @@
 package com.ecommerce.inditex.services;
 
-import com.ecommerce.inditex.entities.PriceEntity;
-import com.ecommerce.inditex.entities.PriceFilterEntity;
-import com.ecommerce.inditex.entities.PriceResponseEntity;
-import com.ecommerce.inditex.exceptions.NoResultFoundException;
-import com.ecommerce.inditex.mappers.PriceEntityMapper;
-import com.ecommerce.inditex.strategies.PriceFilterStrategy;
+import com.ecommerce.inditex.application.FilterPricesService;
+import com.ecommerce.inditex.application.ports.PricesPort;
+import com.ecommerce.inditex.domain.PriceBO;
+import com.ecommerce.inditex.domain.PriceFilterBO;
+import com.ecommerce.inditex.application.exceptions.NoResultFoundException;
+import com.ecommerce.inditex.infrastructure.rest.adapter.PriceBOMapper;
+import com.ecommerce.inditex.application.ports.PriceFilterStrategyPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -23,13 +25,10 @@ class FilterPricesServiceTest {
 
     public class TestContext {
         @Mock
-        private PricesProviderService pricesProvider;
+        private PricesPort pricesProvider;
 
         @Mock
-        private PriceFilterStrategy priceFilterStrategy;
-
-        @Mock
-        private PriceEntityMapper priceEntityMapper;
+        private PriceFilterStrategyPort priceFilterStrategyPort;
 
         @InjectMocks
         private FilterPricesService filterPricesService;
@@ -48,48 +47,52 @@ class FilterPricesServiceTest {
 
     @Test
     void testHappyPathFilterPrices() {
-        PriceFilterEntity priceFilterEntity = PriceFilterEntity.builder().build();
-        PriceEntity priceEntity = PriceEntity.builder().build();
-        PriceResponseEntity priceResponseEntity = PriceResponseEntity.builder().build();
-        List<PriceEntity> priceEntityList = new ArrayList<>();
+        String brandId = "brandId";
+        String productId = "productId";
+        LocalDateTime appliedTime = LocalDateTime.of(2023,07, 07, 23, 00);
+        PriceFilterBO priceFilterBO = PriceFilterBO.builder().brandId(brandId).productId(productId).appliedDate(appliedTime).build();
+        PriceBO priceBO = PriceBO.builder().build();
+        List<PriceBO> priceBOList = new ArrayList<>();
 
-        when(testContext.pricesProvider.getPrices(priceFilterEntity)).thenReturn(priceEntityList);
-        when(testContext.priceFilterStrategy.filter(priceEntityList)).thenReturn(priceEntity);
-        when(testContext.priceEntityMapper.fromPriceEntity(priceEntity)).thenReturn(priceResponseEntity);
+        when(testContext.pricesProvider.getPrices(priceFilterBO)).thenReturn(priceBOList);
+        when(testContext.priceFilterStrategyPort.filter(priceBOList)).thenReturn(priceBO);
 
-        PriceResponseEntity priceResponseValue = testContext.filterPricesService.filterPrices(priceFilterEntity);
+        PriceBO priceResponseValue = testContext.filterPricesService.filterPrices(brandId, productId, appliedTime);
 
-        assertEquals(priceResponseEntity, priceResponseValue);
-        verify(testContext.pricesProvider).getPrices(priceFilterEntity);
-        verify(testContext.priceFilterStrategy).filter(priceEntityList);
-        verify(testContext.priceEntityMapper).fromPriceEntity(priceEntity);
+        assertEquals(priceBO, priceResponseValue);
+        verify(testContext.pricesProvider).getPrices(priceFilterBO);
+        verify(testContext.priceFilterStrategyPort).filter(priceBOList);
     }
 
     @Test
-    void testNoResultsProvided() throws NoResultFoundException {
-        PriceFilterEntity priceFilterEntity = PriceFilterEntity.builder().build();
+    void testNoResultsProvided() {
+        String brandId = "brandId";
+        String productId = "productId";
+        LocalDateTime appliedTime = LocalDateTime.of(2023,07, 07, 23, 00);
+        PriceFilterBO priceFilterBO = PriceFilterBO.builder().brandId(brandId).productId(productId).appliedDate(appliedTime).build();
 
-        when(testContext.pricesProvider.getPrices(priceFilterEntity)).thenThrow(new NoResultFoundException());
+        when(testContext.pricesProvider.getPrices(priceFilterBO)).thenThrow(new NoResultFoundException());
 
-        assertThrows(NoResultFoundException.class, () -> testContext.filterPricesService.filterPrices(priceFilterEntity));
+        assertThrows(NoResultFoundException.class, () -> testContext.filterPricesService.filterPrices(brandId, productId, appliedTime));
 
-        verify(testContext.pricesProvider).getPrices(priceFilterEntity);
-        verifyNoInteractions(testContext.priceFilterStrategy);
-        verifyNoInteractions(testContext.priceEntityMapper);
+        verify(testContext.pricesProvider).getPrices(priceFilterBO);
+        verifyNoInteractions(testContext.priceFilterStrategyPort);
     }
 
     @Test
-    void testNoFilterFoundProvided() throws NoResultFoundException {
-        PriceFilterEntity priceFilterEntity = PriceFilterEntity.builder().build();
-        List<PriceEntity> priceEntityList = Collections.emptyList();
+    void testNoFilterFoundProvided() {
+        String brandId = "brandId";
+        String productId = "productId";
+        LocalDateTime appliedTime = LocalDateTime.of(2023,07, 07, 23, 00);
+        PriceFilterBO priceFilterBO = PriceFilterBO.builder().brandId(brandId).productId(productId).appliedDate(appliedTime).build();
+        List<PriceBO> priceBOList = Collections.emptyList();
 
-        when(testContext.pricesProvider.getPrices(priceFilterEntity)).thenReturn(priceEntityList);
-        when(testContext.priceFilterStrategy.filter(priceEntityList)).thenThrow(new NoResultFoundException());
+        when(testContext.pricesProvider.getPrices(priceFilterBO)).thenReturn(priceBOList);
+        when(testContext.priceFilterStrategyPort.filter(priceBOList)).thenThrow(new NoResultFoundException());
 
-        assertThrows(NoResultFoundException.class, () -> testContext.filterPricesService.filterPrices(priceFilterEntity));
+        assertThrows(NoResultFoundException.class, () -> testContext.filterPricesService.filterPrices(brandId, productId, appliedTime));
 
-        verify(testContext.pricesProvider).getPrices(priceFilterEntity);
-        verify(testContext.priceFilterStrategy).filter(priceEntityList);
-        verifyNoInteractions(testContext.priceEntityMapper);
+        verify(testContext.pricesProvider).getPrices(priceFilterBO);
+        verify(testContext.priceFilterStrategyPort).filter(priceBOList);
     }
 }

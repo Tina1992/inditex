@@ -1,6 +1,6 @@
-package com.ecommerce.inditex.database;
+package com.ecommerce.inditex.infrastructure.database.repositories;
 
-import com.ecommerce.inditex.database.H2PriceEntity;
+import com.ecommerce.inditex.infrastructure.database.entities.H2PriceEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

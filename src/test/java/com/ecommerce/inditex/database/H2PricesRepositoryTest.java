@@ -1,7 +1,7 @@
 package com.ecommerce.inditex.database;
 
-import com.ecommerce.inditex.database.H2PriceEntity;
-import com.ecommerce.inditex.database.H2PricesRepository;
+import com.ecommerce.inditex.infrastructure.database.entities.H2PriceEntity;
+import com.ecommerce.inditex.infrastructure.database.repositories.H2PricesRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

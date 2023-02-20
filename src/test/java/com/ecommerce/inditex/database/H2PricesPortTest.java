@@ -1,15 +1,16 @@
 package com.ecommerce.inditex.database;
 
+import com.ecommerce.inditex.infrastructure.database.adapter.H2PriceEntityMapper;
+import com.ecommerce.inditex.infrastructure.database.H2PricesPort;
+import com.ecommerce.inditex.infrastructure.database.repositories.H2PricesRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-class H2PricesProviderServiceTest {
+class H2PricesPortTest {
 
     private TestContext testContext;
 
@@ -22,7 +23,7 @@ class H2PricesProviderServiceTest {
         private H2PriceEntityMapper h2PriceEntityMapper;
 
         @InjectMocks
-        private H2PricesProviderService h2PricesProviderService;
+        private H2PricesPort h2PricesProviderService;
 
         public TestContext() {
             initMocks(this);
@@ -37,5 +38,7 @@ class H2PricesProviderServiceTest {
 
     @Test
     void getPrices() {
+
+
     }
 }

@@ -1,8 +1,8 @@
 package com.ecommerce.inditex.database;
 
-import com.ecommerce.inditex.entities.PriceEntity;
-import com.ecommerce.inditex.entities.PriceResponseEntity;
-import com.ecommerce.inditex.mappers.PriceEntityMapper;
+import com.ecommerce.inditex.domain.PriceBO;
+import com.ecommerce.inditex.infrastructure.database.entities.H2PriceEntity;
+import com.ecommerce.inditex.infrastructure.database.adapter.H2PriceEntityMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class H2PriceEntityMapperTest {
+class H2PriceBOMapperTest {
 
     private H2PriceEntityMapper h2PriceEntityMapper;
 
@@ -23,7 +23,7 @@ class H2PriceEntityMapperTest {
 
     @Test
     void fromH2PriceNullEntity() {
-        PriceEntity value = h2PriceEntityMapper.fromH2PriceEntity(null);
+        PriceBO value = h2PriceEntityMapper.fromH2PriceEntity(null);
 
         assertNull(value);
     }
@@ -39,7 +39,7 @@ class H2PriceEntityMapperTest {
         h2PriceEntity.setEndDate(LocalDateTime.now());
         h2PriceEntity.setProductId(Long.valueOf(1515));
 
-        PriceEntity value = h2PriceEntityMapper.fromH2PriceEntity(h2PriceEntity);
+        PriceBO value = h2PriceEntityMapper.fromH2PriceEntity(h2PriceEntity);
 
         assertEquals(h2PriceEntity.getPriceListId().toString(), value.getPriceListId());
         assertEquals(h2PriceEntity.getPriceValue(), value.getPriceValue());

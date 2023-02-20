@@ -1,4 +1,4 @@
-package com.ecommerce.inditex.database;
+package com.ecommerce.inditex.infrastructure.database.entities;
 
 import lombok.Data;
 

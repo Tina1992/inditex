@@ -1,4 +1,4 @@
-package com.ecommerce.inditex.entities;
+package com.ecommerce.inditex.domain;
 
 import lombok.Builder;
 import lombok.Data;
@@ -6,9 +6,12 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * Entity to encapsulate price data
+ */
 @Data
 @Builder
-public class PriceResponseEntity {
+public class PriceBO {
 
     private String priceListId;
 
@@ -19,6 +22,8 @@ public class PriceResponseEntity {
     private LocalDateTime startDate;
 
     private LocalDateTime endDate;
+
+    private Integer priority;
 
     private BigDecimal priceValue;
 
