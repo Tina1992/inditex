@@ -1,6 +1,7 @@
 package com.ecommerce.inditex.infrastructure.database.adapter;
 
 import com.ecommerce.inditex.domain.PriceBO;
+import com.ecommerce.inditex.infrastructure.database.entities.BrandEntity;
 import com.ecommerce.inditex.infrastructure.database.entities.PriceEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -46,12 +47,15 @@ class PriceEntityAdapterTest {
      * with {@link PriceEntity} fulfilled.
      */
     @Test
-    void fromH2PriceEntity() {
+    void fromPriceEntity() {
+        BrandEntity brandEntity = new BrandEntity();
+        brandEntity.setId(1);
+
         PriceEntity priceEntity = new PriceEntity();
         priceEntity.setPriceListId(1);
         priceEntity.setPriceCurrency("EUR");
         priceEntity.setPriceValue(BigDecimal.TEN);
-        priceEntity.setBrandId(1);
+        priceEntity.setBrandEntity(brandEntity);
         priceEntity.setStartDate(LocalDateTime.now());
         priceEntity.setEndDate(LocalDateTime.now());
         priceEntity.setProductId(Long.valueOf(18515));
@@ -60,7 +64,7 @@ class PriceEntityAdapterTest {
 
         assertEquals(priceEntity.getPriceListId().toString(), value.getPriceListId());
         assertEquals(priceEntity.getPriceValue(), value.getValue());
-        assertEquals(priceEntity.getBrandId().toString(), value.getBrandId());
+        assertEquals(priceEntity.getBrandEntity().getId().toString(), value.getBrandId());
         assertEquals(priceEntity.getEndDate(), value.getEndDate());
         assertEquals(priceEntity.getStartDate(), value.getStartDate());
         assertEquals(priceEntity.getPriceCurrency(), value.getCurrency());

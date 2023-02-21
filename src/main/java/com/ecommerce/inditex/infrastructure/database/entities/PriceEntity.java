@@ -1,13 +1,17 @@
 package com.ecommerce.inditex.infrastructure.database.entities;
 
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
+import javax.persistence.FetchType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import javax.persistence.JoinColumn;
 
 /**
  * Price entity class.
@@ -27,14 +31,15 @@ public class PriceEntity {
     /**
      * Product id.
      */
-    @Column(name = "PRODUCT_ID")
+    @Column(name = "PRODUCT_ID", nullable = false)
     private Long productId;
 
     /**
      * Brand id.
      */
-    @Column(name = "BRAND_ID")
-    private Integer brandId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "BRAND_ID")
+    private BrandEntity brandEntity;
 
     /**
      * Start date.
@@ -51,18 +56,19 @@ public class PriceEntity {
     /**
      * Priority.
      */
-    @Column(name = "PRIORITY")
+    @Column(name = "PRIORITY", nullable = false)
+    @ColumnDefault("-10")
     private Integer priority;
 
     /**
      * Price value.
      */
-    @Column(name = "PRICE")
+    @Column(name = "PRICE", nullable = false)
     private BigDecimal priceValue;
 
     /**
      * Price currency.
      */
-    @Column(name = "CURRENCY")
+    @Column(name = "CURRENCY", nullable = false)
     private String priceCurrency;
 }

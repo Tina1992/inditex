@@ -18,5 +18,6 @@ public interface PriceEntityAdapter {
      */
     @Mapping(source = "priceValue", target = "value")
     @Mapping(source = "priceCurrency", target = "currency")
+    @Mapping(source = "brandEntity.id", target = "brandId")
     PriceBO fromPriceEntity(PriceEntity priceEntity);
 }

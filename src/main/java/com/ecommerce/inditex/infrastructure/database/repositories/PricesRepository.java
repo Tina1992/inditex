@@ -22,7 +22,7 @@ public interface PricesRepository extends JpaRepository<PriceEntity, Integer> {
      * @param atTime time
      * @return the list of {@link PriceEntity}
      */
-    @Query("SELECT p from PriceEntity p where brandId = :brandId "
+    @Query("SELECT p from PriceEntity p where brandEntity.id = :brandId "
             + "and productId = :productId "
             + "and startDate <= :currentDate "
             + "and :currentDate <= endDate")
