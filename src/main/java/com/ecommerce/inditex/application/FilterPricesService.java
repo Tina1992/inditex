@@ -10,16 +10,32 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Filter prices service.
+ */
 @Service
 public class FilterPricesService {
 
+    /**
+     * Prices provider.
+     */
     @Autowired
     private PricesPort pricesProvider;
 
+    /**
+     * Price filter strategy.
+     */
     @Autowired
     private PriceFilterStrategyPort priceFilterStrategyPort;
 
-    public PriceBO filterPrices(final String brandId,  final String productId, final LocalDateTime appliedTime) {
+    /**
+     * Get price by brand id, product id and applied time.
+     * @param brandId brand id
+     * @param productId product id
+     * @param appliedTime applied time
+     * @return the price applied
+     */
+    public PriceBO getPrice(final String brandId, final String productId, final LocalDateTime appliedTime) {
         List<PriceBO> priceBOList = pricesProvider.getPrices(PriceFilterBO.builder().appliedDate(appliedTime).productId(productId).brandId(brandId).build());
         return priceFilterStrategyPort.filter(priceBOList);
     }

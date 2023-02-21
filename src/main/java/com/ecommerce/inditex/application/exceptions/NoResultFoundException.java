@@ -1,4 +1,7 @@
 package com.ecommerce.inditex.application.exceptions;
 
-public class NoResultFoundException extends RuntimeException{
+/**
+ * No result found exception.
+ */
+public class NoResultFoundException extends RuntimeException {
 }

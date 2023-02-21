@@ -5,13 +5,25 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+/**
+ * Business object to encapsulate price filter data.
+ */
 @Data
 @Builder
 public class PriceFilterBO {
 
-    private LocalDateTime appliedDate;
+    /**
+     * Brand id.
+     */
+    private String brandId;
 
+    /**
+     * Product id.
+     */
     private String productId;
 
-    private String brandId;
+    /**
+     * Applied date.
+     */
+    private LocalDateTime appliedDate;
 }

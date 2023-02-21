@@ -2,7 +2,6 @@ package com.ecommerce.inditex.infrastructure.rest.adapter;
 
 import com.ecommerce.inditex.domain.PriceBO;
 import com.ecommerce.inditex.infrastructure.rest.dto.PriceResponseDto;
-import com.ecommerce.inditex.infrastructure.rest.adapter.PriceBOMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
@@ -13,22 +12,39 @@ import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-class PriceBOMapperTest {
+/**
+ * Unit tests for {@link PriceResponseAdapter}.
+ */
+class PriceResponseAdapterTest {
 
-    private PriceBOMapper priceBOMapper;
+    /**
+     * The {@link PriceResponseAdapter} to test.
+     */
+    private PriceResponseAdapter priceResponseAdapter;
 
+    /**
+     * Test setup.
+     */
     @BeforeEach
     public void setUp() {
-        priceBOMapper = Mappers.getMapper(PriceBOMapper.class);
+        priceResponseAdapter = Mappers.getMapper(PriceResponseAdapter.class);
     }
 
+    /**
+     * Test {@link PriceResponseAdapter#fromPriceBO(PriceBO)}
+     * with null value.
+     */
     @Test
     void testFromPriceNullEntity() {
-        PriceResponseDto value = priceBOMapper.fromPriceBO(null);
+        PriceResponseDto value = priceResponseAdapter.fromPriceBO(null);
 
         assertNull(value);
     }
 
+    /**
+     * Test {@link PriceResponseAdapter#fromPriceBO(PriceBO)}
+     * with {@link PriceBO} value.
+     */
     @Test
     void testFromFullPriceEntity() {
         PriceBO priceBO = PriceBO.builder()
@@ -37,18 +53,18 @@ class PriceBOMapperTest {
                 .brandId("brandId")
                 .startDate(LocalDateTime.now())
                 .endDate(LocalDateTime.now())
-                .priceValue(BigDecimal.TEN)
-                .priceCurrency("EUR")
+                .value(BigDecimal.TEN)
+                .currency("EUR")
                 .build();
 
-        PriceResponseDto value = priceBOMapper.fromPriceBO(priceBO);
+        PriceResponseDto value = priceResponseAdapter.fromPriceBO(priceBO);
 
         assertEquals(priceBO.getPriceListId(), value.getPriceListId());
         assertEquals(priceBO.getProductId(), value.getProductId());
         assertEquals(priceBO.getBrandId(), value.getBrandId());
         assertEquals(priceBO.getStartDate(), value.getStartDate());
         assertEquals(priceBO.getEndDate(), value.getEndDate());
-        assertEquals(priceBO.getPriceValue(), value.getPriceValue());
-        assertEquals(priceBO.getPriceCurrency(), value.getPriceCurrency());
+        assertEquals(priceBO.getValue(), value.getValue());
+        assertEquals(priceBO.getCurrency(), value.getCurrency());
     }
 }

@@ -7,25 +7,49 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * Entity to encapsulate price data
+ * Business object to encapsulate price data.
  */
 @Data
 @Builder
 public class PriceBO {
 
+    /**
+     * Price list id.
+     */
     private String priceListId;
 
+    /**
+     * Product id.
+     */
     private String productId;
 
+    /**
+     * Brand id.
+     */
     private String brandId;
 
+    /**
+     * Start date.
+     */
     private LocalDateTime startDate;
 
+    /**
+     * End date.
+     */
     private LocalDateTime endDate;
 
+    /**
+     * Priority.
+     */
     private Integer priority;
 
-    private BigDecimal priceValue;
+    /**
+     * Value.
+     */
+    private BigDecimal value;
 
-    private String priceCurrency;
+    /**
+     * Currency.
+     */
+    private String currency;
 }
