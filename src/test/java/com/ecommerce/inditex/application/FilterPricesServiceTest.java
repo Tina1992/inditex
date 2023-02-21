@@ -70,12 +70,12 @@ class FilterPricesServiceTest {
      */
     @Test
     void testHappyPathFilterPrices() {
-        String brandId = "brandId";
-        String productId = "productId";
-        LocalDateTime appliedTime = LocalDateTime.of(2023, 07, 07, 23, 00);
-        PriceFilterBO priceFilterBO = PriceFilterBO.builder().brandId(brandId).productId(productId).appliedDate(appliedTime).build();
-        PriceBO priceBO = PriceBO.builder().build();
-        List<PriceBO> priceBOList = new ArrayList<>();
+        final Integer brandId = 1;
+        final Long productId = 35455L;
+        final LocalDateTime appliedTime = LocalDateTime.of(2023, 07, 07, 23, 00);
+        final PriceFilterBO priceFilterBO = PriceFilterBO.builder().brandId(brandId).productId(productId).appliedDate(appliedTime).build();
+        final PriceBO priceBO = PriceBO.builder().build();
+        final List<PriceBO> priceBOList = new ArrayList<>();
 
         when(testContext.pricesProvider.getPrices(priceFilterBO)).thenReturn(priceBOList);
         when(testContext.priceFilterStrategyPort.filter(priceBOList)).thenReturn(priceBO);
@@ -92,8 +92,8 @@ class FilterPricesServiceTest {
      */
     @Test
     void testNoResultFound() {
-        String brandId = "brandId";
-        String productId = "productId";
+        Integer brandId = 1;
+        Long productId = 35455L;
         LocalDateTime appliedTime = LocalDateTime.of(2023, 07, 07, 23, 00);
         PriceFilterBO priceFilterBO = PriceFilterBO.builder().brandId(brandId).productId(productId).appliedDate(appliedTime).build();
         List<PriceBO> priceBOList = Collections.emptyList();

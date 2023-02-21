@@ -15,12 +15,12 @@ public class PriceFilterBO {
     /**
      * Brand id.
      */
-    private String brandId;
+    private Integer brandId;
 
     /**
      * Product id.
      */
-    private String productId;
+    private Long productId;
 
     /**
      * Applied date.

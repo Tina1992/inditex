@@ -35,7 +35,7 @@ public class FilterPricesService {
      * @param appliedTime applied time
      * @return the price applied
      */
-    public PriceBO getPrice(final String brandId, final String productId, final LocalDateTime appliedTime) {
+    public PriceBO getPrice(final Integer brandId, final Long productId, final LocalDateTime appliedTime) {
         List<PriceBO> priceBOList = pricesProvider.getPrices(PriceFilterBO.builder().appliedDate(appliedTime).productId(productId).brandId(brandId).build());
         return priceFilterStrategyPort.filter(priceBOList);
     }

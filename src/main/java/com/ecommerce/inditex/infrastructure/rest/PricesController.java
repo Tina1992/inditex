@@ -41,8 +41,8 @@ public class PricesController {
      * @return the {@link PriceResponseDto}
      */
     @GetMapping("/brands/{brand_id}/products/{product_id}")
-    public PriceResponseDto getPrice(final @PathVariable(BRAND_ID_PARAMETER_NAME) String brandId,
-                                     final @PathVariable(PRODUCT_ID_PARAMETER_NAME) String productId,
+    public PriceResponseDto getPrice(final @PathVariable(BRAND_ID_PARAMETER_NAME) Integer brandId,
+                                     final @PathVariable(PRODUCT_ID_PARAMETER_NAME) Long productId,
                                      final @RequestParam(name = APPLIED_TIME_PARAMETER_NAME) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime appliedTime) {
         return priceResponseAdapter.fromPriceBO(filterPricesService.getPrice(brandId, productId, appliedTime));
     }

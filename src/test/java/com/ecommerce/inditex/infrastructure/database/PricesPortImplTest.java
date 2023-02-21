@@ -76,7 +76,7 @@ class PricesPortImplTest {
         Integer brandId = 1;
         Long productId = Long.valueOf(1);
         LocalDateTime appliedTime = LocalDateTime.of(2023, 07, 07, 23, 00);
-        PriceFilterBO priceFilterBO = PriceFilterBO.builder().brandId(brandId.toString()).productId(productId.toString()).appliedDate(appliedTime).build();
+        PriceFilterBO priceFilterBO = PriceFilterBO.builder().brandId(brandId).productId(productId).appliedDate(appliedTime).build();
         PriceEntity priceEntity = new PriceEntity();
         List<PriceEntity> databaseResults = Arrays.asList(priceEntity);
         PriceBO priceBO = PriceBO.builder().build();
@@ -101,7 +101,7 @@ class PricesPortImplTest {
         Integer brandId = 1;
         Long productId = Long.valueOf(1);
         LocalDateTime appliedTime = LocalDateTime.of(2023, 07, 07, 23, 00);
-        PriceFilterBO priceFilterBO = PriceFilterBO.builder().brandId(brandId.toString()).productId(productId.toString()).appliedDate(appliedTime).build();
+        PriceFilterBO priceFilterBO = PriceFilterBO.builder().brandId(brandId).productId(productId).appliedDate(appliedTime).build();
 
         when(testContext.pricesRepository.findApplicablePrices(brandId, productId, appliedTime)).thenThrow(new NoResultFoundException());
 

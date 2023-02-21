@@ -64,8 +64,8 @@ class PricesControllerTest {
      */
     @Test
     void testHappyPathGetPrice() {
-        final String brandId = "brandId";
-        final String productId = "productId";
+        final Integer brandId = 1;
+        final Long productId = 35455L;
         final LocalDateTime appliedTime = LocalDateTime.of(2023, 07, 07, 23, 00);
         final PriceBO priceBO = PriceBO.builder().build();
         final PriceResponseDto priceResponseDto = PriceResponseDto.builder().build();
